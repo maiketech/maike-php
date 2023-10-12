@@ -1,6 +1,6 @@
 <?php
-use app\ExceptionHandle;
-use app\Request;
+use maike\core\ExceptionHandle;
+use maike\core\Request;
 
 // 容器Provider定义文件
 return [
