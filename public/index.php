@@ -14,8 +14,13 @@ namespace think;
 
 require __DIR__ . '/../vendor/autoload.php';
 
+$app = new App();
+// 设置runtime路径
+$rootPath = $app->getRootPath();
+$runtimePath = $rootPath . 'data' . DIRECTORY_SEPARATOR . 'runtime' . DIRECTORY_SEPARATOR;
+$app->setRuntimePath($runtimePath);
 // 执行HTTP应用并响应
-$http = (new App())->http;
+$http = $app->http;
 
 $response = $http->run();
 
