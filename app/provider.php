@@ -1,5 +1,5 @@
 <?php
-use maike\core\ExceptionHandle;
+use maike\exception\ExceptionHandle;
 use maike\core\Request;
 
 // 容器Provider定义文件

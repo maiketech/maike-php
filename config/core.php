@@ -2,9 +2,9 @@
 return [
     // API请求状态码
     'status_code' => [
-        'success' => 10000,
-        'need_login' => 20000,
-        'access_denied' => 30000
+        'success' => 10000, //成功
+        'not_login' => 20000, //未登录
+        'access_denied' => 30000 //无权访问
     ],
 
     // 跨域header
@@ -15,6 +15,10 @@ return [
         'Access-Control-Max-Age'            =>  '1728000',
         'Access-Control-Allow-Credentials'  => 'true'
     ],
+    
     // Token参数名
-    'token_key' => 'M-Token'
+    'token_key' => 'M-Token',
+
+    //指定管理用户类
+    'console_user_class' => '\app\model\User',
 ];

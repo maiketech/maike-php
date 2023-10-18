@@ -1,6 +1,8 @@
 <?php
 
-namespace app\model;
+namespace app\model\system;
+
+use app\model\BaseModel;
 
 /**
  * 文件库分组模型

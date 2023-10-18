@@ -1,19 +1,19 @@
 <?php
 
-namespace app\middleware;
+namespace maike\middlewares;
 
 use Closure;
 use think\Response;
 use think\facade\Log;
 use maike\interfaces\MiddlewareInterface;
-use app\Request;
+use maike\core\Request;
 use app\model\SystemLog as SystemLogModel;
 
 /**
- * Token认证
- * @package maike\middleware
+ * 系统日志记录中间件
+ * @package maike\middlewares
  */
-class LogMiddleware implements MiddlewareInterface
+class AdminLogMiddleware implements MiddlewareInterface
 {
     /**
      * @param Request $request

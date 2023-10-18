@@ -1,8 +1,9 @@
 <?php
 
-namespace app\model;
+namespace app\model\system;
 
-use maike\utils\Arr;
+use maike\util\Arr;
+use app\model\BaseModel;
 
 class Action extends BaseModel
 {

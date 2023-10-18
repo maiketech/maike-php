@@ -24,6 +24,29 @@ return [
             // 序列化机制 例如 ['serialize', 'unserialize']
             'serialize'  => [],
         ],
+        // redis缓存
+        'redis'   =>  [
+            // 驱动方式
+            'type'          => 'redis',
+            // 服务器地址
+            'host'          => env('REDIS_HOST', '127.0.0.1'),
+            // 端口
+            'port'          => env('REDIS_PORT', '6379'),
+            // 密码
+            'password'      => env('REDIS_PASSWORD', ''),
+            // 缓存有效期 0表示永久缓存
+            'expire'        => 0,
+            // 缓存前缀
+            'prefix'        => env('CACHE_PREFIX', ''),
+            // 缓存标签前缀
+            'tag_prefix'    => env('CACHE_TAG_PREFIX', 'maike:'),
+            // 数据库 0号数据库
+            'select'        => intval(env('REDIS_SELECT', '')),
+            // 序列化机制 例如 ['serialize', 'unserialize']
+            'serialize'     => [],
+            // 服务端主动关闭
+            'timeout'       => 0
+        ],
         // 更多的缓存连接
     ],
 ];

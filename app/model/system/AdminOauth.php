@@ -1,8 +1,10 @@
 <?php
 
-namespace app\model;
+namespace app\model\system;
 
-class UserOauth extends BaseModel
+use app\model\BaseModel;
+
+class AdminOauth extends BaseModel
 {
     /**
      * 根据OauthID获取OAuth信息

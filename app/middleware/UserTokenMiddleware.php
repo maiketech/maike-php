@@ -1,22 +1,21 @@
 <?php
 
-namespace app\middleware;
+namespace maike\middlewares;
 
 use Closure;
 use think\facade\Config;
-use app\Request;
 use think\Response;
 use maike\interfaces\MiddlewareInterface;
 use maike\exceptions\ApiException;
+use maike\core\Request;
 use app\model\User as UserModel;
 
 /**
- * Token认证
- * @package maike\middleware
+ * 用户Token认证
+ * @package maike\middlewares
  */
-class AuthTokenMiddleware implements MiddlewareInterface
+class UserTokenMiddleware implements MiddlewareInterface
 {
-
     /**
      * @param Request $request
      * @param \Closure $next
@@ -24,15 +23,20 @@ class AuthTokenMiddleware implements MiddlewareInterface
      */
     public function handle(Request $request, \Closure $next)
     {
-        $token = $request->header(Config::get('api.token_key', 'M-Token'));
+        $coreConfig = Config::get('core');
+        // 判断Token是否有效
+        $tokenKey = isset($coreConfig['token_key']) && !empty($coreConfig['token_key']) ? $coreConfig['token_key'] : 'M-Token';
+        $token = $request->header($tokenKey);
         if (empty($token)) {
-            throw new ApiException("invalid M-Token", 30000);
+            // 无效Token
+            throw new ApiException("Invalid " . $tokenKey, $coreConfig['access_denied'] ?? 30000);
         }
-        
+
+        //获取用户登录
         $service = app()->make(UserModel::class);
         $userInfo = $service->parseToken($token);
         if ($userInfo) {
-            $userInfo = $userInfo->toArray();
+            $userInfo = $userInfo->hidden(['password'])->toArray();
         }
 
         Request::macro('userId', function () use (&$userInfo) {

@@ -1,11 +1,12 @@
 <?php
 
-namespace app\model;
+namespace app\model\system;
 
-use maike\utils\Arr;
-use maike\utils\Str;
+use app\model\BaseModel;
+use maike\util\Arr;
+use maike\util\Str;
 
-class UserRole extends BaseModel
+class AdminRole extends BaseModel
 {
     protected $pk = 'role_id';
     protected $append = ['status_desc', 'not_allow_delete'];

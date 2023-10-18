@@ -1,7 +1,8 @@
 <?php
 
-namespace app\model;
+namespace app\model\system;
 
+use app\model\BaseModel;
 use think\Exception;
 use think\facade\Request;
 use think\facade\Log;

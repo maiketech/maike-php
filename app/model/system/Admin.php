@@ -1,17 +1,17 @@
 <?php
 
-namespace app\model;
+namespace app\model\system;
 
+use app\model\BaseModel;
 use think\Exception;
 use think\model\concern\SoftDelete;
 use think\facade\Request;
 use think\facade\Config;
-use maike\utils\Arr;
-use maike\utils\DT;
-use maike\services\wechat\WechatApp;
-use maike\traits\JwtAuthModelTrait;
+use maike\util\Arr;
+use maike\util\DT;
+use maike\trait\JwtAuthModelTrait;
 
-class User extends BaseModel
+class Admin extends BaseModel
 {
 	use SoftDelete;
 	use JwtAuthModelTrait;
@@ -34,7 +34,7 @@ class User extends BaseModel
 
 	public function getAvatarAttr($value)
 	{
-		return empty($value) ? baseUrl() . 'console/image/avatar_default.png' : $value;
+		return empty($value) ? BaseUrl() . 'console/image/avatar_default.png' : $value;
 	}
 
 	public function getAuthsAttr($value, $data)

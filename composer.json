@@ -19,7 +19,6 @@
         "topthink/think-filesystem": "^2.0",
         "topthink/think-multi-app": "^1.0",
         "topthink/think-captcha": "^3.0",
-        "topthink/think-cors": "^1.0",
         "maiketech/maike-core": "^1.0"
     },
     "require-dev": {

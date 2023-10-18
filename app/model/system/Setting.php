@@ -1,10 +1,10 @@
 <?php
 
-namespace app\model;
+namespace app\model\system;
 
 use app\model\BaseModel;
-use maike\utils\Str;
-use maike\utils\Arr;
+use maike\util\Str;
+use maike\util\Arr;
 
 class Setting extends BaseModel
 {

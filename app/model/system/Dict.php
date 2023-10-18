@@ -1,9 +1,10 @@
 <?php
 
-namespace app\model;
+namespace app\model\system;
 
-use maike\utils\Arr;
-use maike\utils\Str;
+use app\model\BaseModel;
+use maike\util\Arr;
+use maike\util\Str;
 
 class Dict extends BaseModel
 {
