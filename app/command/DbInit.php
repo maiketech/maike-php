@@ -26,7 +26,7 @@ class DbInit extends Command
             exit;
         }
 
-        $prefix = 'm_';
+        $prefix = 'mks_';
         if ($input->hasOption('prefix')) {
             $prefix = trim($input->getOption('prefix'));
         }
@@ -111,9 +111,9 @@ class DbInit extends Command
      * @param string $tablepre
      * @return array
      */
-    private function sqlSplit($sql, $tablepre = 'm_')
+    private function sqlSplit($sql, $tablepre = 'mks_')
     {
-        if ($tablepre != 'm_') $sql = str_replace("m_", $tablepre, $sql);
+        if ($tablepre != 'mks_') $sql = str_replace("mks_", $tablepre, $sql);
         $sql = preg_replace("/TYPE=(InnoDB|MyISAM|MEMORY)( DEFAULT CHARSET=[^; ]+)?/", "ENGINE=\\1 DEFAULT CHARSET=utf8", $sql);
         $sql = str_replace("\r", "\n", $sql);
         $ret = array();
