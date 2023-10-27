@@ -2,9 +2,12 @@
 
 namespace app\model\system;
 
-use maike\util\Arr;
+use maike\util\ArrUtil;
 use app\model\BaseModel;
 
+/**
+ * 权限表
+ */
 class Action extends BaseModel
 {
 	protected $pk = "action_id";
@@ -17,8 +20,8 @@ class Action extends BaseModel
 	{
 		$data = static::getAllByCache();
 		if ($data && count($data) > 0) {
-			$menu = Arr::Search($data, "is_menu", 1);
-			return Arr::Sort($menu, "sort");
+			$menu = ArrUtil::Search($data, "is_menu", 1);
+			return ArrUtil::Sort($menu, "sort");
 		}
 		return null;
 	}
@@ -33,7 +36,7 @@ class Action extends BaseModel
 		if (!$action || empty($action)) return null;
 		$data = static::getAllByCache();
 		if ($data && count($data) > 0) {
-			return Arr::Search($data, "action", $action);
+			return ArrUtil::Search($data, "action", $action);
 		}
 		return null;
 	}
@@ -43,14 +46,14 @@ class Action extends BaseModel
 	 * @param integer|array $actionId
 	 * @return array
 	 */
-	public static function getAllById($actionId)
+	public static function getById($actionId)
 	{
 		$data = static::getAllByCache();
 		$result = [];
 		if (is_array($actionId)) {
-			$result = Arr::Search($data, 'action_id', $actionId, "in");
+			$result = ArrUtil::Search($data, 'action_id', $actionId, "in");
 		} else {
-			$result = Arr::Search($data, 'action_id', $actionId);
+			$result = ArrUtil::Search($data, 'action_id', $actionId);
 		}
 		return $result;
 	}

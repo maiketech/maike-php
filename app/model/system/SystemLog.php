@@ -56,8 +56,6 @@ class SystemLog extends BaseModel
                 if (isset($params['action'])) unset($params['action']);
                 if (isset($params['password'])) $params['password'] = "****";
                 $data = [
-                    'user_name' => $username,
-                    'user_realname' => $realname,
                     'module' => $module,
                     'action_id' => $actionId,
                     'action' => $actionUrl,
@@ -67,9 +65,10 @@ class SystemLog extends BaseModel
                     'title' => empty($title) ? '【未知】' : $title,
                     'desc' => empty($content) ? '【未知】' : $content,
                     'ip' => $request->ip(),
+                    'ip_desc' => '',
                     'user_agent' => $request->server('HTTP_USER_AGENT'),
-                    'operator_id' => $creatorId,
-                    'org_id' => $createOrgId,
+                    'operator_id' => $operatorId,
+                    'operator_name' => $operatorName,
                     'create_time' => time()
                 ];
                 // 日志入库

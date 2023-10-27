@@ -3,8 +3,8 @@
 namespace app\model\system;
 
 use app\model\BaseModel;
-use maike\util\Arr;
-use maike\util\Str;
+use maike\util\ArrUtil;
+use maike\util\StrUtil;
 
 class AdminRole extends BaseModel
 {
@@ -13,12 +13,12 @@ class AdminRole extends BaseModel
 
     public function setActionIdsAttr($value)
     {
-        return is_array($value) ? Arr::ToString($value) : $value;
+        return is_array($value) ? ArrUtil::ToString($value) : $value;
     }
 
     public function getActionIdsAttr($value)
     {
-        return !empty($value) ? Str::ToArray($value, ",", "int") : [];
+        return !empty($value) ? StrUtil::ToArray($value, ",", "int") : [];
     }
 
     //获取字段处理

@@ -3,8 +3,8 @@
 namespace app\model\system;
 
 use app\model\BaseModel;
-use maike\util\Str;
-use maike\util\Arr;
+use maike\util\StrUtil;
+use maike\util\ArrUtil;
 
 class Setting extends BaseModel
 {
@@ -21,7 +21,7 @@ class Setting extends BaseModel
             if ($data['input_type'] == 'event_type_select') {
                 $options = (array)$data['options'];
                 if (isset($options['mode']) && $options['mode'] == 'multiple') {
-                    return $data['value'] == null ? [] : Str::ToArray($data['value'], ",", "int");
+                    return $data['value'] == null ? [] : StrUtil::ToArray($data['value'], ",", "int");
                 }
             } else if ($data['input_type'] == 'editor') {
                 return empty($value) ? "" : htmlspecialchars_decode($value);
@@ -33,7 +33,7 @@ class Setting extends BaseModel
     public function setValueAttr($value, $data)
     {
         if (!empty($value)) {
-            return is_array($value) ? Arr::ToString($value) : $value;
+            return is_array($value) ? ArrUtil::ToString($value) : $value;
         }
         return $value;
     }
@@ -47,20 +47,20 @@ class Setting extends BaseModel
     {
         $data = self::getAllByCache();
         if ($data) {
-            $data = Arr::Sort($data, 'sort');
-            $data = Arr::ColumnToKey($data, "key");
+            $data = ArrUtil::Sort($data, 'sort');
+            $data = ArrUtil::ColumnToKey($data, "key");
         }
         if (strpos($key, ".") !== false) {
-            $arr = Str::ToArray($key, ".");
+            $arr = StrUtil::ToArray($key, ".");
             if (count($arr) > 1) {
                 $group = $arr[0];
                 $item = $arr[1];
                 $itemData = false;
                 if (!empty($group) && !empty($item)) {
-                    $groupData = Arr::Search($data, 'group', $group);
-                    if ($groupData) $itemData = Arr::Search($data, 'key', $item);
+                    $groupData = ArrUtil::Search($data, 'group', $group);
+                    if ($groupData) $itemData = ArrUtil::Search($data, 'key', $item);
                 } else if (!empty($item)) {
-                    $itemData = Arr::Search($data, 'key', $item);
+                    $itemData = ArrUtil::Search($data, 'key', $item);
                 }
                 return $itemData && isset($itemData['value']) ? $itemData['value'] : $defalutValue;
             }
@@ -77,8 +77,8 @@ class Setting extends BaseModel
     {
         $data = self::getAllByCache();
         if ($data) {
-            $data = Arr::Sort($data, 'sort');
-            $data = Arr::Search($data, 'group', $group);
+            $data = ArrUtil::Sort($data, 'sort');
+            $data = ArrUtil::Search($data, 'group', $group);
         }
         $setting = [];
         foreach ($data as $item) {
@@ -92,11 +92,11 @@ class Setting extends BaseModel
     {
         $data = self::getAllByCache(-1);
         if ($data) {
-            $data = Arr::Sort($data, 'sort');
+            $data = ArrUtil::Sort($data, 'sort');
         }
         $itemArr = [];
         foreach (self::$group as $g => $title) {
-            $tmp = Arr::Search($data, 'group', $g);
+            $tmp = ArrUtil::Search($data, 'group', $g);
             $items = [];
             foreach ($tmp as $item) {
                 $items[] = [[

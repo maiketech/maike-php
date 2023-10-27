@@ -7,8 +7,8 @@ use think\Exception;
 use think\model\concern\SoftDelete;
 use think\facade\Request;
 use think\facade\Config;
-use maike\util\Arr;
-use maike\util\DT;
+use maike\util\ArrUtil;
+use maike\util\DateTimeUtil;
 use maike\trait\JwtAuthModelTrait;
 
 class Admin extends BaseModel
@@ -16,7 +16,7 @@ class Admin extends BaseModel
 	use SoftDelete;
 	use JwtAuthModelTrait;
 
-	protected $pk = 'user_id';
+	protected $pk = 'admin_id';
 	protected $with = ['role'];
 	protected $append = ['status_desc', 'not_allow_view', 'not_allow_edit', 'not_allow_delete'];
 
@@ -34,7 +34,7 @@ class Admin extends BaseModel
 
 	public function getAvatarAttr($value)
 	{
-		return empty($value) ? BaseUrl() . 'console/image/avatar_default.png' : $value;
+		return empty($value) ? BaseUrl() . 'status/image/avatar_default.png' : $value;
 	}
 
 	public function getAuthsAttr($value, $data)
@@ -51,7 +51,7 @@ class Admin extends BaseModel
 
 	public function getLastLoginTimeAttr($value, $data)
 	{
-		return !empty($value) && $value != 0 ? DT::Format($value) : '';
+		return !empty($value) && $value != 0 ? DateTimeUtil::Format($value) : '';
 	}
 
 	public function getNotAllowViewAttr($value, $data)
@@ -70,7 +70,7 @@ class Admin extends BaseModel
 	}
 
 	/**
-	 * 生成菜单
+	 * 获取管理菜单数据
 	 * @return array
 	 */
 	public function getMenuData($userInfo)
@@ -92,7 +92,7 @@ class Admin extends BaseModel
 			}
 		}
 
-		$menu = Arr::ToTree((array)$menu, 0, "action_id", "pid", "sub");
+		$menu = ArrUtil::ToTree((array)$menu, 0, "action_id", "pid", "sub");
 		$new = [];
 		foreach ($menu as $k => $item) {
 			$newItem = [
@@ -122,95 +122,6 @@ class Admin extends BaseModel
 			}
 		}
 		return $new;
-	}
-
-	/**
-	 * 微信一键登录
-	 *
-	 * @param array $params
-	 * @return mixed
-	 */
-	public function wxlogin($params)
-	{
-		try {
-			$config = Config::get("wechat.app");
-			if (!$config || empty($config)) {
-				throw new Exception("登录失败");
-			}
-
-			$userInfo = false;
-			$app = new WechatApp($config);
-			$session = $app->code2session($params['code']);
-
-			if (!$session) {
-				throw new Exception("登录失败");
-			}
-			$userInfo = [
-				'openid' => $session['openid'],
-				'unionid' => isset($session['unionid']) ? $session['unionid'] : ''
-			];
-
-			$userId = 0;
-			$user = false;
-			$userId = UserOauth::getUserIdByOauthId($userInfo['openid']);
-
-			if ($userId > 0) {
-				$user = static::get($userId);
-				if ($user && $user['status'] == 0) {
-					throw new Exception("账号已被禁用");
-				}
-			}
-
-			$oauthData = [];
-			if (!$user || empty($user)) {
-				//新用户注册                
-				$this->startTrans();
-				try {
-					$oauthData = UserOauth::getByOauthId($userInfo['openid']);
-					if (!$oauthData) {
-						// 新增用户记录
-						$oauthData = [
-							'user_id' => 0,
-							'oauth_id' => $userInfo['openid'],
-							'unionid' => $userInfo['unionid'],
-							'oauth_type' => 'wechat'
-						];
-						UserOauth::create($oauthData);
-					}
-
-					$this->commit();
-					return $oauthData;
-				} catch (\Exception $e) {
-					$this->rollback();
-					$this->setError($e->getMessage());
-					return false;
-				}
-			}
-
-			$user->tokenExpire = strtotime("+99 days");
-
-			//生成Token
-			$token = '';
-			$tokenData = $user->createToken();
-			if ($tokenData && isset($tokenData['token'])) {
-				$token = $tokenData['token'];
-			}
-
-			//新增登录记录
-			$loginLog = [
-				'user_agent' => Request::header('user-agent'),
-				'ip' => Request::ip(),
-				'token' => $token,
-				'user_id' => $user['user_id'],
-				'expire_time' => time() + 86400 * 7
-			];
-			UserLogin::create($loginLog);
-
-			return compact('user', 'token');
-		} catch (Exception $e) {
-			$this->setError($e->getMessage());
-			return false;
-		}
 	}
 
 	/**
@@ -245,20 +156,6 @@ class Admin extends BaseModel
 				return false;
 			}
 
-			if (!empty($oauthId)) {
-				//绑定账号
-				$oauthInfo = UserOauth::get([['oauth_id', '=', $oauthId]]);
-				if ($oauthInfo) {
-					if (!$oauthInfo->save(['user_id' => $info['user_id']])) {
-						$this->setError('绑定失败');
-						return false;
-					}
-				} else {
-					$this->setError('绑定失败');
-					return false;
-				}
-			}
-
 			$info->tokenExpire = strtotime("+99 days");
 
 			//生成Token
@@ -276,7 +173,7 @@ class Admin extends BaseModel
 				'user_id' => $info['user_id'],
 				'expire_time' => time() + 86400 * 7
 			];
-			UserLogin::create($loginLog);
+			AdminLogin::create($loginLog);
 
 			return compact('info', 'token');
 		} catch (\think\Exception $e) {

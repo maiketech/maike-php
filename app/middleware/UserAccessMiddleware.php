@@ -1,18 +1,18 @@
 <?php
 
-namespace maike\middlewares;
+namespace app\middleware;
 
 use Closure;
 use think\facade\Config;
 use think\Response;
 use maike\core\Request;
-use maike\interfaces\MiddlewareInterface;
-use maike\exceptions\ApiException;
-use maike\services\system\User as UserService;
+use maike\interface\MiddlewareInterface;
+use maike\exception\ApiException;
+use app\service\system\UserCheckPermission;
 
 /**
  * 管理员权限验证中间件
- * @package maike\middlewares
+ * @package app\middleware
  */
 class UserAccessMiddleware implements MiddlewareInterface
 {

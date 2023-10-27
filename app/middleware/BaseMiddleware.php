@@ -1,9 +1,9 @@
 <?php
 
-namespace maike\middlewares;
+namespace app\middleware;
 
 use maike\core\Request;
-use maike\interfaces\MiddlewareInterface;
+use maike\interface\MiddlewareInterface;
 
 class BaseMiddleware implements MiddlewareInterface
 {

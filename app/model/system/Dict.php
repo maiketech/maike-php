@@ -3,12 +3,12 @@
 namespace app\model\system;
 
 use app\model\BaseModel;
-use maike\util\Arr;
-use maike\util\Str;
+use maike\util\StrUtil;
 
 class Dict extends BaseModel
 {
     protected $append = ['group_desc'];
+
     //定义分组
     private static $groupText = [
         'group' => '标签'
@@ -55,7 +55,7 @@ class Dict extends BaseModel
     public static function getTitleByGroup($group = '', $values = [])
     {
         if (!is_array($values)) {
-            $values = Str::ToArray($values);
+            $values = StrUtil::ToArray($values);
         }
         $res = self::getByGroup($group);
         $arr = [];

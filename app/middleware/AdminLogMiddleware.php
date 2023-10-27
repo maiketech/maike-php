@@ -1,17 +1,17 @@
 <?php
 
-namespace maike\middlewares;
+namespace app\middleware;
 
 use Closure;
 use think\Response;
 use think\facade\Log;
-use maike\interfaces\MiddlewareInterface;
+use maike\interface\MiddlewareInterface;
 use maike\core\Request;
-use app\model\SystemLog as SystemLogModel;
+use app\model\system\SystemLog as SystemLogModel;
 
 /**
  * 系统日志记录中间件
- * @package maike\middlewares
+ * @package app\middleware
  */
 class AdminLogMiddleware implements MiddlewareInterface
 {
@@ -25,7 +25,7 @@ class AdminLogMiddleware implements MiddlewareInterface
         //操作日志记录
         try {
             $model = app()->make(SystemLogModel::class);
-            $model->record($request->adminId(), $request->adminId()['username']);
+            $model->record($request);
         } catch (\Throwable $e) {
             Log::write($e->getMessage(), "error");
         }

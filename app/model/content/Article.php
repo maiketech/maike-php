@@ -1,9 +1,10 @@
 <?php
 
-namespace app\model;
+namespace app\model\content;
 
-use maike\utils\DT;
-use maike\utils\Str;
+use maike\util\DateTimeUtil;
+use maike\util\StrUtil;
+use app\model\BaseModel;
 
 class Article extends BaseModel
 {
@@ -18,12 +19,12 @@ class Article extends BaseModel
 
     public function getTimeTextAttr($value, $data)
     {
-        return isset($data['create_time']) && $data['create_time'] > 0 ? DT::Format($data['create_time'], 'Y-m-d') : '--';
+        return isset($data['create_time']) && $data['create_time'] > 0 ? DateTimeUtil::Format($data['create_time'], 'Y-m-d') : '--';
     }
 
     public function getIntroAttr($value, $data)
     {
-        return isset($data['content']) && !empty($data['content']) ? Str::Sub($data['content'], 30) : '';
+        return isset($data['content']) && !empty($data['content']) ? StrUtil::Sub($data['content'], 30) : '';
     }
 
     /**

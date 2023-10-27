@@ -1,18 +1,18 @@
 <?php
 
-namespace maike\middlewares;
+namespace app\middleware;
 
 use Closure;
 use think\facade\Config;
 use think\Response;
-use maike\interfaces\MiddlewareInterface;
-use maike\exceptions\ApiException;
+use maike\interface\MiddlewareInterface;
+use maike\exception\ApiException;
 use maike\core\Request;
-use app\model\Admin as AdminModel;
+use app\model\system\Admin as AdminModel;
 
 /**
  * 后台管理员Token认证
- * @package maike\middlewares
+ * @package app\middleware
  */
 class AdminTokenMiddleware implements MiddlewareInterface
 {
