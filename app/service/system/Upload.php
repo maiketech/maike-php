@@ -6,15 +6,19 @@ use think\facade\Config;
 use think\facade\Request;
 use think\facade\Filesystem;
 use think\facade\Log;
-use maike\service\BaseService;
+use maike\trait\ErrorTrait;
 use app\model\system\Attachment as AttachmentModel;
 
-class Upload extends BaseService
+class Upload
 {
+    use ErrorTrait;
+
     private $fileList = []; //上传成功的文件数组
 
     /**
      * 图片上传接口
+     * 
+     * @return array|\think\model\Collection|boolean
      */
     public function image($userId = 0, $field = 'image')
     {
@@ -23,6 +27,8 @@ class Upload extends BaseService
 
     /**
      * 视频上传接口
+     * 
+     * @return array|\think\model\Collection|boolean
      */
     public function video($userId = 0, $field = 'video')
     {
@@ -31,6 +37,8 @@ class Upload extends BaseService
 
     /**
      * 文件上传接口
+     * 
+     * @return array|\think\model\Collection|boolean
      */
     public function file($userId = 0, $field = 'file')
     {
@@ -43,7 +51,7 @@ class Upload extends BaseService
      * @param string $field
      * @param string $type image图片、video视频、file文件
      * @param integer $uploaderId 上传人ID
-     * @return boolean
+     * @return array|\think\model\Collection|boolean
      */
     public function upload($field = 'image', $type = 'image', $uploaderId = 0)
     {

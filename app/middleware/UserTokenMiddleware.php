@@ -6,7 +6,6 @@ use Closure;
 use think\facade\Config;
 use think\Response;
 use maike\interface\MiddlewareInterface;
-use maike\exception\ApiException;
 use maike\core\Request;
 use app\model\user\User as UserModel;
 
@@ -29,7 +28,7 @@ class UserTokenMiddleware implements MiddlewareInterface
         $token = $request->header($tokenKey);
         if (empty($token)) {
             // 无效Token
-            throw new ApiException("Invalid " . $tokenKey, $coreConfig['access_denied'] ?? 30000);
+            ThrowError("Invalid " . $tokenKey, $coreConfig['access_denied'] ?? 30000);
         }
 
         //获取用户登录

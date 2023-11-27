@@ -30,7 +30,7 @@ class AdminTokenMiddleware implements MiddlewareInterface
         if (empty($token)) {
             // 无效Token
             $statusCode = isset($coreConfig['status_code']['access_denied']) ? $coreConfig['status_code']['access_denied'] : 30000;
-            throw new ApiException("Invalid " . $tokenKey, $statusCode);
+            ThrowError("Invalid " . $tokenKey, $statusCode);
         }
 
         //获取管理员用户登录

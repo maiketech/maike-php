@@ -17,8 +17,5 @@ return [
     ],
     
     // Token参数名
-    'token_key' => 'M-Token',
-
-    //指定管理用户类
-    'console_user_class' => '\app\model\User',
+    'token_key' => 'M-Token'
 ];

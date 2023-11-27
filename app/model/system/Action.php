@@ -57,4 +57,19 @@ class Action extends BaseModel
 		}
 		return $result;
 	}
+
+	/**
+	 * 基础权限
+	 *
+	 * @return array
+	 */
+	public static function getBase()
+	{
+		$data = static::getAllByCache();
+		if ($data && count($data) > 0) {
+			$menu = ArrUtil::Search($data, "base_auth", 1);
+			return is_array($menu) ? ArrUtil::Sort($menu, "sort") : [];
+		}
+		return [];
+	}
 }

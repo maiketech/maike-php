@@ -12,7 +12,8 @@ class Setting extends BaseModel
     protected $json = ['options'];
 
     public static $group = [
-        'system' => '基础设置'
+        'system' => '基础设置',
+        'agreement' => '协议设置'
     ];
 
     public function getValueAttr($value, $data)
@@ -73,7 +74,7 @@ class Setting extends BaseModel
      * @param $group
      * @return array
      */
-    public static function getItemByGroup($group)
+    public static function getItemBygroup($group)
     {
         $data = self::getAllByCache();
         if ($data) {
@@ -94,6 +95,7 @@ class Setting extends BaseModel
         if ($data) {
             $data = ArrUtil::Sort($data, 'sort');
         }
+
         $itemArr = [];
         foreach (self::$group as $g => $title) {
             $tmp = ArrUtil::Search($data, 'group', $g);

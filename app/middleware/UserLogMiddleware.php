@@ -13,7 +13,7 @@ use app\model\system\SystemLog as SystemLogModel;
  * 系统日志记录中间件
  * @package app\middleware
  */
-class AdminLogMiddleware implements MiddlewareInterface
+class UserLogMiddleware implements MiddlewareInterface
 {
     /**
      * @param Request $request

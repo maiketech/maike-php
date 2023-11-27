@@ -2,12 +2,15 @@
 
 namespace app\model\system;
 
+use think\model\concern\SoftDelete;
 use app\model\BaseModel;
 use maike\util\ArrUtil;
 use maike\util\StrUtil;
 
 class AdminRole extends BaseModel
 {
+    use SoftDelete;
+    
     protected $pk = 'role_id';
     protected $append = ['status_desc', 'not_allow_delete'];
 
@@ -19,6 +22,29 @@ class AdminRole extends BaseModel
     public function getActionIdsAttr($value)
     {
         return !empty($value) ? StrUtil::ToArray($value, ",", "int") : [];
+    }
+
+    public function setAuthsAttr($value)
+    {
+        return is_array($value) ? ArrUtil::ToString($value) : $value;
+    }
+
+    public function getAuthsAttr($value)
+    {
+        return !empty($value) ? StrUtil::ToArray($value) : [];
+    }
+
+    public function setActionsAttr($value)
+    {
+        return is_array($value) ? ArrUtil::ToString($value) : $value;
+    }
+
+    public function getActionsAttr($value)
+    {
+        $arr = !empty($value) ? StrUtil::ToArray($value) : [];
+		$baseAuths = Action::getBase();
+		if (!is_array($arr)) $arr = [];
+		return array_merge($baseAuths, $arr);
     }
 
     //获取字段处理

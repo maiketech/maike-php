@@ -11,6 +11,8 @@ use think\facade\Env;
 
 class DbInit extends Command
 {
+    const PREFIX = 'mksys_';
+
     protected function configure()
     {
         $this->setName('dbinit')
@@ -111,9 +113,9 @@ class DbInit extends Command
      * @param string $tablepre
      * @return array
      */
-    private function sqlSplit($sql, $tablepre = 'mks_')
+    private function sqlSplit($sql, $tablepre = DbInit::PREFIX)
     {
-        if ($tablepre != 'mks_') $sql = str_replace("mks_", $tablepre, $sql);
+        if ($tablepre != DbInit::PREFIX) $sql = str_replace(DbInit::PREFIX, $tablepre, $sql);
         $sql = preg_replace("/TYPE=(InnoDB|MyISAM|MEMORY)( DEFAULT CHARSET=[^; ]+)?/", "ENGINE=\\1 DEFAULT CHARSET=utf8", $sql);
         $sql = str_replace("\r", "\n", $sql);
         $ret = array();

@@ -2,10 +2,13 @@
 
 namespace app\model\system;
 
+use think\model\concern\SoftDelete;
 use app\model\BaseModel;
 
 class AdminOauth extends BaseModel
 {
+    use SoftDelete;
+    
     /**
      * 根据OauthID获取OAuth信息
      * @param string $OauthID

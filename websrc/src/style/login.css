@@ -1,0 +1,114 @@
+body {
+    overflow: hidden;
+    margin: 0;
+    background: url("/image/login-bg.jpg") no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    height: 100vh;
+}
+
+.copyright {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+}
+
+.login-logo {
+    width: 400px;
+    height: 45px;
+    background-image: url("/image/login-logo.png");
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: auto 100%;
+    left: 50px;
+    top: 30px;
+    position: absolute;
+}
+
+.login-main {
+    height: 460px;
+    width: 1100px;
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    margin-left: -600px;
+    margin-top: -210px;
+    border-radius: 20px;
+    background-image: url("/image/login-theme.png");
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: auto 100%;
+}
+
+.login-main .title {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+}
+
+.user-layout-login {
+    width: 360px;
+    height: 360px;
+    position: absolute;
+    right: 15px;
+    top: 30px;
+    padding: 25px 35px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 10px;
+    box-shadow: 2px -1px 13px 0px rgba(0, 0, 0, 0.15);
+}
+
+.user-layout-login .ant-input-group-addon{
+    overflow: hidden !important;
+    border: 1px solid #D9D9D9 !important;
+}
+
+.user-layout-login label {
+    font-size: 14px;
+}
+
+.user-layout-login .ant-input-group-addon {
+    padding: 0 !important;
+    border: 0;
+    border-left: 1px solid #d9d9d9;
+}
+
+.user-layout-login .captcha {
+    cursor: pointer;
+    border: 0;
+    width: 120px;
+    height: 36px;
+}
+
+.user-layout-login .forge-password {
+    font-size: 14px;
+}
+
+.user-layout-login .user-login-other {
+    text-align: left;
+    margin-top: 24px;
+    line-height: 22px;
+}
+
+.user-layout-login .user-login-other .item-icon {
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.2);
+    margin-left: 16px;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.user-layout-login .user-login-other .item-icon:hover {
+    color: #1890ff;
+}
+
+
+.user-layout-login .user-login-other .register {
+    float: right;
+}

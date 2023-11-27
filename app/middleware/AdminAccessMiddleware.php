@@ -8,7 +8,7 @@ use think\Response;
 use maike\core\Request;
 use maike\interface\MiddlewareInterface;
 use maike\exception\ApiException;
-use app\service\system\AdminCheckPermission;
+use app\service\system\Admin as AdminService;
 
 /**
  * 管理员权限验证中间件
@@ -26,14 +26,14 @@ class AdminAccessMiddleware implements MiddlewareInterface
     {
         if (!$request->adminId() || !$request->adminInfo()) {
             $statusCode = Config::get('core.status_code.not_login', 20000);
-            throw new ApiException("未登录", $statusCode);
+            ThrowError("未登录", $statusCode);
         }
 
         //权限验证
-        $service = app()->make(AdminCheckPermission::class);
-        if (!$service->check($request)) {
+        $service = app()->make(AdminService::class);
+        if (!$service->checkAuth($request)) {
             $statusCode = Config::get('core.status_code.access_denied', 30000);
-            throw new ApiException("无权限", $statusCode);
+            ThrowError("无权限", $statusCode);
         }
 
         return $next($request);
