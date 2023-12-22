@@ -46,7 +46,7 @@ if (!function_exists('BaseUrl')) {
             $scheme = $request->scheme();
             $prot = $request->port();
             // 拼接完整url
-            $baseUrl = "{$scheme}://" . $request->host()  . (empty($prot) ? '' : ':' . $prot) . '/';
+            $baseUrl = "{$scheme}://" . $request->host()  . (empty($prot)||$prot=='80' ? '' : ':' . $prot) . '/';
         }
         return $baseUrl;
     }
