@@ -96,7 +96,7 @@ class Admin
             }
         }
 
-        $menu = ArrUtil::ToTree((array)$menu, -1, "action_id");
+        $menu = ArrUtil::ToTree((array)$menu, "action_id");
         $new = [];
         foreach ($menu as $k => $item) {
             $newItem = [

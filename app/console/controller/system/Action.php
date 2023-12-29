@@ -16,7 +16,7 @@ class Action extends Base
         $list = ActionModel::getAllByCache();
         $data = [];
         if ($list) {
-            $data = ArrUtil::ToTree($list, -1, "action_id");
+            $data = ArrUtil::ToTree($list, "action_id");
             foreach ($data as &$item) {
                 $item['key'] = $item['action_id'];
                 $item['value'] = $item['action_id'];
