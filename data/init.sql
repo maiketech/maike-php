@@ -4,8 +4,8 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 -- Table structure for m_action
 -- ----------------------------
-DROP TABLE IF EXISTS `mks_action`;
-CREATE TABLE `mks_action`  (
+DROP TABLE IF EXISTS `mksys_action`;
+CREATE TABLE `mksys_action`  (
   `action_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) UNSIGNED NOT NULL DEFAULT 0 COMMENT '上级菜单id',
   `title` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '菜单标题',
@@ -23,8 +23,8 @@ CREATE TABLE `mks_action`  (
 -- ----------------------------
 -- Table structure for m_admin
 -- ----------------------------
-DROP TABLE IF EXISTS `mks_admin`;
-CREATE TABLE `mks_admin`  (
+DROP TABLE IF EXISTS `mksys_admin`;
+CREATE TABLE `mksys_admin`  (
   `admin_id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `role_id` int(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '角色ID',
   `name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '姓名',
@@ -46,8 +46,8 @@ CREATE TABLE `mks_admin`  (
 -- ----------------------------
 -- Table structure for m_admin_login
 -- ----------------------------
-DROP TABLE IF EXISTS `mks_admin_login`;
-CREATE TABLE `mks_admin_login`  (
+DROP TABLE IF EXISTS `mksys_admin_login`;
+CREATE TABLE `mksys_admin_login`  (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `token` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'TOKEN值',
   `admin_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'TOKEN关联的用户ID',
@@ -63,8 +63,8 @@ CREATE TABLE `mks_admin_login`  (
 -- ----------------------------
 -- Table structure for m_admin_oauth
 -- ----------------------------
-DROP TABLE IF EXISTS `mks_admin_oauth`;
-CREATE TABLE `mks_admin_oauth`  (
+DROP TABLE IF EXISTS `mksys_admin_oauth`;
+CREATE TABLE `mksys_admin_oauth`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
   `admin_id` int(11) UNSIGNED NOT NULL DEFAULT 0 COMMENT '用户ID',
   `oauth_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '第三方登陆类型(wechat、alipay)',
@@ -83,8 +83,8 @@ CREATE TABLE `mks_admin_oauth`  (
 -- ----------------------------
 -- Table structure for m_admin_role
 -- ----------------------------
-DROP TABLE IF EXISTS `mks_admin_role`;
-CREATE TABLE `mks_admin_role`  (
+DROP TABLE IF EXISTS `mksys_admin_role`;
+CREATE TABLE `mksys_admin_role`  (
   `role_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '角色id',
   `role_name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '角色名称',
   `desc` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '角色描述',
@@ -102,8 +102,8 @@ CREATE TABLE `mks_admin_role`  (
 -- ----------------------------
 -- Table structure for m_article
 -- ----------------------------
-DROP TABLE IF EXISTS `mks_article`;
-CREATE TABLE `mks_article`  (
+DROP TABLE IF EXISTS `mksys_article`;
+CREATE TABLE `mksys_article`  (
   `article_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '文章id',
   `title` varchar(400) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '文章标题',
   `category_id` int(11) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分类id',
@@ -123,8 +123,8 @@ CREATE TABLE `mks_article`  (
 -- ----------------------------
 -- Table structure for m_article_category
 -- ----------------------------
-DROP TABLE IF EXISTS `mks_article_category`;
-CREATE TABLE `mks_article_category`  (
+DROP TABLE IF EXISTS `mksys_article_category`;
+CREATE TABLE `mksys_article_category`  (
   `category_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '分类id',
   `category_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '分类名称',
   `icon` varchar(500) NULL DEFAULT '',
@@ -137,8 +137,8 @@ CREATE TABLE `mks_article_category`  (
 -- ----------------------------
 -- Table structure for m_attachment
 -- ----------------------------
-DROP TABLE IF EXISTS `mks_attachment`;
-CREATE TABLE `mks_attachment`  (
+DROP TABLE IF EXISTS `mksys_attachment`;
+CREATE TABLE `mksys_attachment`  (
   `attach_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '文件ID',
   `group_id` int(11) UNSIGNED NOT NULL DEFAULT 0 COMMENT '文件分组ID',
   `storage` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '存储方式',
@@ -161,8 +161,8 @@ CREATE TABLE `mks_attachment`  (
 -- ----------------------------
 -- Table structure for m_attachment_group
 -- ----------------------------
-DROP TABLE IF EXISTS `mks_attachment_group`;
-CREATE TABLE `mks_attachment_group`  (
+DROP TABLE IF EXISTS `mksys_attachment_group`;
+CREATE TABLE `mksys_attachment_group`  (
   `group_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '分组ID',
   `group_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '分组名称',
   `type` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'image' COMMENT '文件类型(image图片 video视频 file文件)',
@@ -177,8 +177,8 @@ CREATE TABLE `mks_attachment_group`  (
 -- ----------------------------
 -- Table structure for m_dict
 -- ----------------------------
-DROP TABLE IF EXISTS `mks_dict`;
-CREATE TABLE `mks_dict`  (
+DROP TABLE IF EXISTS `mksys_dict`;
+CREATE TABLE `mksys_dict`  (
   `key` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `value` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
@@ -193,8 +193,8 @@ CREATE TABLE `mks_dict`  (
 -- ----------------------------
 -- Table structure for m_help
 -- ----------------------------
-DROP TABLE IF EXISTS `mks_help`;
-CREATE TABLE `mks_help`  (
+DROP TABLE IF EXISTS `mksys_help`;
+CREATE TABLE `mksys_help`  (
   `help_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键ID',
   `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '帮助标题',
   `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '帮助内容',
@@ -211,8 +211,8 @@ CREATE TABLE `mks_help`  (
 -- ----------------------------
 -- Table structure for m_notice
 -- ----------------------------
-DROP TABLE IF EXISTS `mks_notice`;
-CREATE TABLE `mks_notice`  (
+DROP TABLE IF EXISTS `mksys_notice`;
+CREATE TABLE `mksys_notice`  (
   `notice_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '文章id',
   `title` varchar(400) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '文章标题',
   `content` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '文章内容',
@@ -229,8 +229,8 @@ CREATE TABLE `mks_notice`  (
 -- ----------------------------
 -- Table structure for m_setting
 -- ----------------------------
-DROP TABLE IF EXISTS `mks_setting`;
-CREATE TABLE `mks_setting`  (
+DROP TABLE IF EXISTS `mksys_setting`;
+CREATE TABLE `mksys_setting`  (
   `key` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '配置名称',
   `title` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '配置说明',
   `input_type` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'text' COMMENT '配置输入类型',
@@ -248,8 +248,8 @@ CREATE TABLE `mks_setting`  (
 -- ----------------------------
 -- Table structure for m_system_log
 -- ----------------------------
-DROP TABLE IF EXISTS `mks_system_log`;
-CREATE TABLE `mks_system_log`  (
+DROP TABLE IF EXISTS `mksys_system_log`;
+CREATE TABLE `mksys_system_log`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '唯一性标识',
   `action_id` int(10) NOT NULL DEFAULT 0 COMMENT '行为ID',
   `method` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '请求类型',
@@ -270,8 +270,8 @@ CREATE TABLE `mks_system_log`  (
 -- ----------------------------
 -- Table structure for m_user
 -- ----------------------------
-DROP TABLE IF EXISTS `mks_user`;
-CREATE TABLE `mks_user`  (
+DROP TABLE IF EXISTS `mksys_user`;
+CREATE TABLE `mksys_user`  (
   `user_id` int(20) NOT NULL AUTO_INCREMENT,
   `nickname` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '昵称',
   `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '真实姓名',
@@ -294,8 +294,8 @@ CREATE TABLE `mks_user`  (
 -- ----------------------------
 -- Table structure for m_user_login
 -- ----------------------------
-DROP TABLE IF EXISTS `mks_user_login`;
-CREATE TABLE `mks_user_login`  (
+DROP TABLE IF EXISTS `mksys_user_login`;
+CREATE TABLE `mksys_user_login`  (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `token` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'TOKEN值',
   `user_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'TOKEN关联的用户ID',
@@ -311,8 +311,8 @@ CREATE TABLE `mks_user_login`  (
 -- ----------------------------
 -- Table structure for m_user_oauth
 -- ----------------------------
-DROP TABLE IF EXISTS `mks_user_oauth`;
-CREATE TABLE `mks_user_oauth`  (
+DROP TABLE IF EXISTS `mksys_user_oauth`;
+CREATE TABLE `mksys_user_oauth`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
   `user_id` int(11) UNSIGNED NOT NULL DEFAULT 0 COMMENT '用户ID',
   `oauth_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '第三方登陆类型(wechat、alipay)',
